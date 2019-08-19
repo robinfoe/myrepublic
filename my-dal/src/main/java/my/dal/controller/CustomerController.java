@@ -5,11 +5,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Produces;
 import my.com.common.scalar.Customer;
 import my.dal.controller.base.BaseController;
 import my.dal.service.CustomerService;
