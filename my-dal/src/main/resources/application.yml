@@ -1,0 +1,31 @@
+---
+micronaut:
+  application:
+    name: my-dal
+
+---
+# datasources:
+#   default:
+#     url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+#     driverClassName: org.h2.Driver
+#     username: sa
+#     password: ''    
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/myrepublic
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: drowssap 
+jpa:
+  default:
+    entity-scan: 
+      classpath: true
+      packages: my.com.common.scalar
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+
+
