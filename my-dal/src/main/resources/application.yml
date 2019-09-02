@@ -2,7 +2,25 @@
 micronaut:
   application:
     name: my-dal
+  server:
+    port: 8081
+              
+---
+micronaut:
+  security:
+    enabled: true
+    token:
+      jwt:
+        enabled: true
+        signatures:
+          secret:
+            validation:
+              secret: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl8Ewe9TQ5KJl43M7RAObMKnAJ5AB212vL+v8M8YbOoEHM67H34HyMzeTfpOpuHJs8XmTPPJ9fdRSIaODpv+dOc8Yjmaj+gXIVrOWsR0MSJJ0oxPrmjjzD7RyVsD1HM1avNAkWtXfXWVPP/u00gpmxit79mXMh9MClZhtMs1JDPnHdrzZGXvLrtvAORpKiJy+G7/wI4sZW6cZ7x3A9BTlu33xIIGfQzgqM91zQjszbYYK4pGyYVgDOAt8bPrQz0mE6+pWYDsM3dQNRWxdXhUvOSQij8horRS3Ed1Ayc36g9coP24twqJhZ0JpLbgTEw3FW4FvAnnbMjBPiOQrci7MZwIDAQAB
+              jws-algorithm: RS256
+              base64: true
 
+keycloack:
+  pub: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAglFmlb8Y8Wb6q3vnzFXNZFs5Za0LEtu3J90ZXuHwlU+CF8HwWLNmn6b4ovsMHNGspnuOQptn+QlAAf/9NQ8bpFy6u+k+RHtoYbGA1xrfKAU6lRINx+TranV+ts5+bsX3DN6SGJF9HZGwBH7/9DanW+Rq65bQbGS0FEB594vJo+TOYgnjUYqZbklinOawnMfp6kjcgilS/EuJ2Wi7R79sbxvkYTgGYYCjk+N9sWYcMaRgBUBIFnT5QEuhkiHq0jdRjievmSwdSVTjxIbCQiMykTrUcPuw/TH47SxNj0ceEXEZJP375Aep6zvW394krUZvVnp24rFPvhEGgkpB68oMkQIDAQAB
 ---
 # datasources:
 #   default:
@@ -15,8 +33,8 @@ datasources:
   default:
     url: jdbc:postgresql://localhost:5432/myrepublic
     driverClassName: org.postgresql.Driver
-    username: postgres
-    password: drowssap 
+    username: admin
+    password: password 
 jpa:
   default:
     entity-scan: 

@@ -13,7 +13,7 @@ public interface MyService<T extends BaseEntity> {
 
     public T save(@NotNull T item);
     public T delete(@NotNull T item);
-    public T getByPk(@NotNull Integer pk);
+    public T getByPk(@NotNull Long pk);
     public List<T> getAll();
     
 }

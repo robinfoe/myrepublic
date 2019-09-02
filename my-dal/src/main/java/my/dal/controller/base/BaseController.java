@@ -12,6 +12,8 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Produces;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import my.com.common.scalar.base.BaseEntity;
 import my.dal.service.base.MyService;
 
@@ -25,7 +27,7 @@ public abstract class BaseController<T extends BaseEntity> {
 
     @Get(uri = "/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public T getByid(@PathVariable Integer id){
+    public T getByid(@PathVariable Long id){
         T item = this.getService().getByPk(id);
         return item;
     }    
@@ -38,6 +40,7 @@ public abstract class BaseController<T extends BaseEntity> {
 
     @Post
     @Produces(MediaType.APPLICATION_JSON)
+    @Secured(SecurityRule.IS_AUTHENTICATED)
     public T save(@Body T item){
         log.info("@@@ Save....");
         this.getService().save(item);

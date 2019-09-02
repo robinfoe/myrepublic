@@ -28,6 +28,7 @@ public class CustomerController extends BaseController<Customer>{
         return this.service;
     }
 
+
     
     // @Get(consumes = MediaType.APPLICATION_JSON)
     // @Produces(MediaType.APPLICATION_JSON)
