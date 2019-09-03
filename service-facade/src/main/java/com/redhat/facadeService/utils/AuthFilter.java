@@ -34,10 +34,14 @@ public class AuthFilter implements Filter{
 		String jwt=(String)(((HttpServletRequest)request).getHeader("Authorization")).substring(7);
 		log.info("jwt: \n"+jwt);
 		JwtResponse jwtResponse=authService.getInfo(jwt);
-		//log.info("clientId:"+jwtResponse.getJws().getBody().get("clientId"));
-		//log.info("scope:"+jwtResponse.getJws().getBody().get("scope"));
+		if (jwtResponse.getStatus()==jwtResponse.getStatus().SUCCESS) {
+			log.info("Got token with clientId:"+jwtResponse.getJws().getBody().get("clientId"));
+			//log.info("scope:"+jwtResponse.getJws().getBody().get("scope"));
+			
+		} else {
+			log.info("issue with token: "+jwtResponse.getExceptionType());
+		}
 		request.setAttribute("REQ_JWT_RESPONSE", jwtResponse);//probably not a good idea for production system
-		
 		chain.doFilter(request, response);
 	}
 

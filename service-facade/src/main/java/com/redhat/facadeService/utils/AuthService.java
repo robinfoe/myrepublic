@@ -36,6 +36,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redhat.facadeService.SecretService;
 import com.redhat.facadeService.model.JwtResponse;
+import com.redhat.facadeService.model.JwtResponse.Status;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -56,8 +57,9 @@ public class AuthService {
 		TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
 
 	    SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
-	                    .loadTrustMaterial(new File("/home/virtuser/rh-sso-7.3/standalone/configuration/application.keystore"))
-	                    .build();
+	                    //.loadTrustMaterial(new File("/home/virtuser/rh-sso-7.3/standalone/configuration/application.keystore"))
+	    				.loadTrustMaterial(new File(env.getProperty("sso.endpoint.keystore")))
+	    				.build();
 	    
 	    SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
 
@@ -90,6 +92,8 @@ public class AuthService {
 			jwtResponse=parser(jwt, publickey);
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			jwtResponse.setStatus(Status.ERROR);
+			jwtResponse.setExceptionType(ex.toString());
 		}
 		return jwtResponse;
 	}
