@@ -32,7 +32,15 @@ curl -H "Authorization: Bearer "$access_token -H "Content-type: application/json
 ```
 The route in fuse does a few things
 - download the public key from RHSSO, use it to validate the token.
+- keeps the access_token in the header, so that downstream endpoints can access
 - create JwtResponse wrapper object that makes it easy to access the scope and claims in that token.
 - store the JwtResponse object in request attribute REQ_JWT_RESPONSE
+
+important configuration in application.properties
+```
+backend.endpoint=http://localhost:3000/test # endpoint of downstream system to call
+sso.internal.endpoint=https://localhost:8443/auth/realms/demo-realm/ # endpoint of sso server
+sso.endpoint.keystore=/home/virtuser/rh-sso-7.3/standalone/configuration/application.keystore # keystore for sso
+```
 
 
